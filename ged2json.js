@@ -83,7 +83,7 @@ function getRefs(node, refs = {}) {
     return refs
 }
 
-module.exports = {
-    parse,
-    refs: getRefs
-}
+// module.exports = {
+//     parse,
+//     refs: getRefs
+// }
