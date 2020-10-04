@@ -5,10 +5,13 @@
 <body>
 <h1>GEDCOM to JSON</h1>
 <table>
-  <tr><th>GEDCOM</th><th>JSON</th></tr>
+  <tr><th>GEDCOM</th><td></td><th>JSON</th></tr>
   <tr>
   <td>
-    <textarea onchange="parseIt()" id="gedcom" rows="20" cols="50"></textarea>
+    <textarea id="gedcom" rows="20" cols="50"></textarea>
+  </td>
+  <td>
+	<button onClick='parseIt()'>CONVERT</button>
   </td>
   <td>
     <textarea id="json" rows="20" cols="50" readonly></textarea>
