@@ -8,7 +8,7 @@
   <tr><th>GEDCOM</th><th>JSON</th></tr>
   <tr>
   <td>
-    <textarea id="gedcom" rows="20" cols="50"></textarea>
+    <textarea onchange="parseIt()" id="gedcom" rows="20" cols="50"></textarea>
   </td>
   <td>
     <textarea id="json" rows="20" cols="50" readonly></textarea>
@@ -16,4 +16,11 @@
   </tr>  
 
 </table>
+  <script>
+    function parseIt() {
+      var txt = document.getElementById('gedcom').value
+      var data = parse(txt)
+      document.getElementById('json').value = JSON.stringify(data, null, '  ')
+    }
+  </script>
 </body>
