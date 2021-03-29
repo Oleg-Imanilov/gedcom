@@ -1,27 +1,6 @@
 <html>
 <head>
   <script src="https://raw.githubusercontent.com/Oleg-Imanilov/gedcom/main/ged2json.js"></script>
-</head>
-<body>
-<h1>GEDCOM to JSON</h1>
-  <button onClick='test1()'>Example short GEDCOM</button>
-<br/>
-<table>
-  <tr><th>GEDCOM</th><td></td><th>JSON</th></tr>
-  <tr>
-  <td>
-    <textarea id="gedcom" rows="50" cols="80"></textarea>
-  </td>
-  <td valign='top'>
-     <button onClick='parseIt()'>CONVERT</button>
-  </td>
-  <td>
-    <textarea id="json" rows="50" cols="120" readonly></textarea>
-  </td>
-  </tr>  
-
-</table>
-  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>1
   <script>
     function parseIt() {
       var txt = document.getElementById('gedcom').value
@@ -30,7 +9,7 @@
     }
     
     function test1() {
-document.getElementById('gedcom').value = `0 HEAD
+      document.getElementById('gedcom').value = `0 HEAD
 1 SOUR PAF
 2 NAME Personal Ancestral File
 2 VERS 5.0
@@ -63,4 +42,26 @@ document.getElementById('gedcom').value = `0 HEAD
 `    }
    
   </script>
+</head>
+<body>
+<h1>GEDCOM to JSON</h1>
+  <button onClick='test1()'>Example short GEDCOM</button>
+<br/>
+<table>
+  <tr><th>GEDCOM</th><td></td><th>JSON</th></tr>
+  <tr>
+  <td>
+    <textarea id="gedcom" rows="50" cols="80"></textarea>
+  </td>
+  <td valign='top'>
+     <button onClick='parseIt()'>CONVERT</button>
+  </td>
+  <td>
+    <textarea id="json" rows="50" cols="120" readonly></textarea>
+  </td>
+  </tr>  
+
+</table>
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+ 
 </body>
