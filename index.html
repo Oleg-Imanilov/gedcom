@@ -1,67 +1,12 @@
 <html>
 <head>
-  <script type="text/htmlpreview" src="https://raw.githubusercontent.com/Oleg-Imanilov/gedcom/main/ged2json.js"></script>
-  <script>
-    function parseIt() {
-      var txt = document.getElementById('gedcom').value
-      var data = parse(txt)
-      document.getElementById('json').value = JSON.stringify(data, null, '  ')
-    }
-    
-    function test1() {
-      document.getElementById('gedcom').value = `0 HEAD
-1 SOUR PAF
-2 NAME Personal Ancestral File
-2 VERS 5.0
-1 DATE 30 NOV 2000
-1 GEDC
-2 VERS 5.5
-2 FORM LINEAGE-LINKED
-1 CHAR ANSEL
-1 SUBM @U1@
-0 @I1@ INDI
-1 NAME John /Smith/
-1 SEX M
-1 FAMS @F1@
-0 @I2@ INDI
-1 NAME Elizabeth /Stansfield/
-1 SEX F
-1 FAMS @F1@
-0 @I3@ INDI
-1 NAME James /Smith/
-1 SEX M
-1 FAMC @F1@
-0 @F1@ FAM
-1 HUSB @I1@
-1 WIFE @I2@
-1 MARR
-1 CHIL @I3@
-0 @U1@ SUBM
-1 NAME Submitter
-0 TRLR
-`    }
-   
-  </script>
+  <script type="text/htmlpreview" src="https://raw.githubusercontent.com/Oleg-Imanilov/gedcom/main/main.js"></script>
+  <script src="http://d3js.org/d3.v4.js"></script>
 </head>
 <body>
-<h1>GEDCOM to JSON</h1>
-  <button onClick='test1()'>Example short GEDCOM</button>
-<br/>
-<table>
-  <tr><th>GEDCOM</th><td></td><th>JSON</th></tr>
-  <tr>
-  <td>
-    <textarea id="gedcom" rows="50" cols="80"></textarea>
-  </td>
-  <td valign='top'>
-     <button onClick='parseIt()'>CONVERT</button>
-  </td>
-  <td>
-    <textarea id="json" rows="50" cols="120" readonly></textarea>
-  </td>
-  </tr>  
-
-</table>
-  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
- 
+  <svg id="mysvg" style="position:absolute;top:0px;bottom:0;left:0;right:0;z-index:-1"></svg>
+  <div style="z-index: 1000;">
+      <input id="gedinput" type="file" name="gedinput" multiple="false"  />
+  </div>
+  <script type="module" src="/main.js"></script> 
 </body>
