@@ -47,7 +47,6 @@ export default class GedTree {
         d3.select('#indi').on('change', (event) => {
             const id = event.target.value
             this.gedNav.select(id)
-            console.log('!!!', id)            
             const [links, nodes] = this.gedNav.getLinksNodes()
             console.log(nodes)
             this.setNodes(links, nodes, true);
@@ -145,7 +144,6 @@ export default class GedTree {
     strength(d) {
         return 2
     }
-
     
     setNodes = (links, nodes) => {
         this.links = links
@@ -194,10 +192,10 @@ export default class GedTree {
 
     dragstarted = (event, d) => {
         const {shiftKey} = event
-        if (!event.active) this.simulation.alphaTarget(0.3).restart();
+        if (!event.active) this.simulation.alphaTarget(0.1).restart();
         d.fx = d.x;
         d.fy = d.y;
-        // console.log(event, d)
+
         const my_circle = d3.select(`#node_${d.id.replace(/\@/g,'')}`).select('circle');
         if (my_circle.attr("class") == "fixed" && shiftKey) {
             my_circle.attr("class", "not-fixed");
@@ -216,7 +214,9 @@ export default class GedTree {
     dragended = (event, d) => {
         if (!event.active) this.simulation.alphaTarget(0);
         //stickiness - unfixes the node if not-fixed or a person
-        const my_circle = d3.select(`#node_${d.id.replace(/\@/g,'')}`).select('circle');
+        const my_circle = d3.select(`#node_${d.id.replace(/\@/g,'')}`)
+            .select('circle');
+
         if (my_circle.attr("class") == "not-fixed") {
             d.fx = null;
             d.fy = null;
@@ -301,6 +301,7 @@ export default class GedTree {
             .attr("transform", d => `translate(${d.x}, ${d.y})`)
             .style("fill", "black")
             .attr("dx", 0)
+            .attr("dy", 0)
             // .attr("dy", this.nodeRadius + 64)
             .attr("text-anchor", "middle")
 

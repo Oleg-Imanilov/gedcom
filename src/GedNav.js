@@ -79,115 +79,6 @@ export class GedNav {
         return this.gedJson.INDI;
     };
 
-    getLinksNodes1(x = 0, y = 0) {
-        const nodes = [];
-        const links = [];
-
-        const fams = Object.values(this.REFS).filter(
-            (n) => n.type == "FAM" && this.selected[n.id]
-        );
-        const indies = Object.values(this.REFS).filter(
-            (n) => n.type == "INDI" && this.selected[n.id]
-        );
-
-
-
-        indies.forEach((n) => {
-            let img = false; // (n.files && n.files[0] && n.files[0].source) || false;
-            if (n.OBJE && n.OBJE.length > 0) {
-                img = n.OBJE[0].FILE._;
-            } else if (n.OBJE && n.OBJE.FILE) {
-                img = n.OBJE.FILE._;
-            }
-
-            const indi = {
-                type: "INDI",
-                id: n.id,
-                name: n.NAME._ || n.NAME || "?",
-                title: n.TITL || '',
-                sex: n.SEX || '',
-                bd: n.BIRT && n.BIRT.DATE || '',
-                dd: n.DEAT && n.DEAT.DATE || '',                
-                image: img,
-            }
-
-            // if(n.BIRT && n.BIRT.DATE && typeof n.BIRT.DATE === 'string' )
-
-            nodes.push(indi);
-        });
-
-        fams.forEach((n) => {
-            nodes.push({
-                type: "FAM",
-                id: n.id,
-                name: "",
-                image: false,
-            });
-        });
-        nodes.forEach((n) => {
-            if (n.x === undefined || n.y === undefined) {
-                n.x = x;
-                n.y = y;
-            }
-        });
-
-
-        fams.forEach((n, ix) => {
-            if (n.WIFE) {
-                const wid = n.WIFE._ || n.WIFE;
-                links.push({
-                    id: `${wid}-${n.id}`,
-                    source: wid,
-                    target: n.id,
-                    type: n.DIV ? "divorced" : "married",
-                });
-            }
-            if (n.HUSB) {
-                const hid = n.HUSB._ || n.HUSB;
-                links.push({
-                    id: `${hid}-${n.id}`,
-                    source: hid,
-                    target: n.id,
-                    type: n.DIV ? "divorced" : "married",
-                });
-            }
-            if (n.HUSB && n.WIFE) {
-                const wid = n.WIFE._ || n.WIFE;
-                const hid = n.HUSB._ || n.HUSB;
-                links.push({
-                    id: `${hid}-${wid}`,
-                    source: wid,
-                    target: hid,
-                    type: n.DIV ? "divorced" : "married",
-                });
-            }
-
-            if (n.CHIL) {
-                if (Array.isArray(n.CHIL)) {
-                    n.CHIL.map(t => t._ || t).forEach((ch) => {
-                        links.push({
-                            id: `${ch}-${n.id}`,
-                            source: ch,
-                            target: n.id,
-                            type: "child",
-                        });
-                    });
-                } else {
-                    const chid = n.CHIL._ || n.CHIL;
-                    links.push({
-                        id: `${chid}-${n.id}`,
-                        source: chid,
-                        target: n.id,
-                        type: "child",
-                    });
-                }
-            }
-        });
-
-        return [links, nodes];
-    }
-
-
     getLinksNodes(x = 0, y = 0) {
         const nodes = {};
         const links = [];
@@ -307,13 +198,6 @@ export class GedNav {
         });
 
         const nArr = Object.values(nodes)
-
-        nArr.forEach((n) => {
-            if (n.x === undefined || n.y === undefined) {
-                n.x = x;
-                n.y = y;
-            }
-        });
 
         return [links, nArr];
     }
